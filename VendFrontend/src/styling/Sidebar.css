@@ -1,0 +1,233 @@
+/* ---------- Sidebar Container ---------- */
+.dash-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    background: linear-gradient(180deg, rgb(239, 129, 10) 0%, rgb(72, 46, 0) 100%);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    transition: width 0.3s ease;
+    z-index: 100;
+    overflow-x: hidden;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.dash-sidebar-open {
+    width: 260px;
+}
+
+.dash-sidebar-closed {
+    width: 70px;
+}
+
+/* ---------- Sidebar Header ---------- */
+.dash-sidebar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.dash-logo {
+    font-size: 20px;
+    margin: 0;
+    white-space: nowrap;
+    font-family: arial;
+}
+
+.dash-sidebar-toggle {
+    position: absolute;
+    right: -12px;
+    top: 20px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #e94560;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 101;
+}
+
+.dash-sidebar-closed .dash-sidebar-toggle {
+    right: -12px;
+}
+
+/* ---------- Sidebar Content ---------- */
+.dash-sidebar-content {
+    flex: 1;
+    padding: 20px 0;
+}
+
+/* ---------- Menu Items ---------- */
+.dash-menu-item {
+    display: flex;
+    align-items: center;
+    width: calc(100% - 16px);
+    margin: 2px 5px;
+    padding: 12px 16px;
+    background: none;
+    border: none;
+    border-radius: 10px;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    transition: all 0.7s ease;
+    text-align: left;
+    gap: 12px;
+}
+
+.dash-menu-item:hover {
+    background: rgba(255, 255, 255, 0.15);
+    color: white;
+    transform: translateX(6px);
+}
+
+.dash-menu-item-active {
+    background: #632b00;
+    color: white;
+    box-shadow: 0 4px 12px rgba(233, 69, 96, 0.3);
+}
+
+.dash-menu-item-active:hover {
+    transform: translateX(6px);
+    background: #895000;
+}
+
+.dash-menu-icon {
+    font-size: 30px;
+    min-width: 30px;
+}
+
+.dash-menu-label {
+    font-size: 17px;
+    white-space: nowrap;
+}
+
+/* ---------- Sidebar Footer ---------- */
+.dash-sidebar-footer {
+    padding: 20px 16px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* ---------- User Info (Clickable) ---------- */
+.dash-user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.dash-user-info:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* ---------- User Avatar ---------- */
+.dash-user-avatar {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 50%;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    overflow: hidden;
+}
+
+.dash-user-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.dash-user-avatar-placeholder {
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+}
+
+/* ---------- User Details ---------- */
+.dash-user-details {
+    flex: 1;
+    overflow: hidden;
+}
+
+.dash-user-name {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: arial;
+    margin: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: white;
+}
+
+.dash-user-role {
+    font-size: 11px;
+    font-family: arial;
+    opacity: 0.7;
+    margin: 4px 0 0;
+    color: rgba(255, 255, 255, 0.8);
+    text-transform: capitalize;
+}
+
+/* ---------- Collapsed Sidebar ---------- */
+.dash-sidebar-closed .dash-user-info {
+    justify-content: left;
+    padding: 10px;
+}
+
+.dash-sidebar-closed .dash-user-avatar {
+    width: 36px;
+    height: 36px;
+    font-size: 16px;
+}
+
+/* ---------- Logout Button ---------- */
+.dash-logout-btn {
+    width: 100%;
+    padding: 10px;
+    background: #e94560;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.dash-logout-btn:hover {
+    background: #c62a47;
+}
+
+/* ---------- Sidebar Responsive ---------- */
+@media (max-width: 768px) {
+    .dash-sidebar-open {
+        width: 220px;
+    }
+}
+
+@media (max-width: 576px) {
+    .dash-sidebar-closed {
+        width: 55px;
+    }
+    
+    .dash-sidebar-closed .dash-user-avatar {
+        width: 36px;
+        height: 36px;
+        font-size: 16px;
+    }
+}
