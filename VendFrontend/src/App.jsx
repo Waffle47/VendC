@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { HashRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import Login from './pages/Login';
 import Register from './pages/Register';
@@ -14,26 +14,26 @@ const isAdmin = (user) => {
 // Protected route wrapper for admin only
 const AdminRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    
+
     if (loading) {
         return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>;
     }
-    
+
     if (user && isAdmin(user)) {
         return children;
     }
-    
+
     return <Navigate to="/login" />;
 };
 
 // Protected route wrapper for any authenticated user
 const PrivateRoute = ({ children }) => {
     const { user, loading } = useAuth();
-    
+
     if (loading) {
         return <div style={{ textAlign: 'center', marginTop: '50px' }}>Loading...</div>;
     }
-    
+
     return user ? children : <Navigate to="/login" />;
 };
 
@@ -41,9 +41,9 @@ const PrivateRoute = ({ children }) => {
 function App() {
     return (
         <AuthProvider>
-            <BrowserRouter>
+            <HashRouter>
                 <AppRoutes />
-            </BrowserRouter>
+            </HashRouter>
         </AuthProvider>
     );
 }
@@ -61,23 +61,23 @@ function AppRoutes() {
             {/* Public routes */}
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            
+
             {/* Root path - redirect to login */}
             <Route path="/" element={<Navigate to="/login" />} />
-            
+
             {/* Admin only route */}
-            <Route 
-                path="/admin" 
+            <Route
+                path="/admin"
                 element={
                     <AdminRoute>
                         <AdminDashboard />
                     </AdminRoute>
-                } 
+                }
             />
-            
+
             {/* Role-based dashboard - same /dashboard URL shows different content */}
-            <Route 
-                path="/dashboard" 
+            <Route
+                path="/dashboard"
                 element={
                     <PrivateRoute>
                         {user?.userType === 'admin' ? (
@@ -90,9 +90,9 @@ function AppRoutes() {
                             <Navigate to="/login" />
                         )}
                     </PrivateRoute>
-                } 
+                }
             />
-            
+
             {/* Catch all - redirect to login */}
             <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
