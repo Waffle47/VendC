@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import backImage from '../assets/logbckg.png';
 import loginIllustration from '../assets/connectlogo.png';
+import { Link } from 'react-router-dom';
 import '../styling/login.css';
 
 function Login() {
@@ -123,9 +124,9 @@ function Login() {
 
                         <div className="login-register-link">
                             Don't have an account?{' '}
-                            <a href="/register" className="login-register-btn">
+                            <Link to="/register" className="login-register-btn">
                                 Create one here
-                            </a>
+                            </Link>
                         </div>
 
                     </div>
