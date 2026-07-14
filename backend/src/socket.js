@@ -23,7 +23,8 @@ const generateRoomId = (gcid1, gcid2) => {
 const initializeSocket = (server) => {
     io = socketIO(server, {
         cors: {
-            origin: ['http://localhost:3000', 'http://localhost:5173'],
+            // Add process.env.FRONTEND_URL to the list of allowed origins
+            origin: ['http://localhost:3000', 'http://localhost:5173', process.env.FRONTEND_URL],
             methods: ['GET', 'POST'],
             credentials: true
         },
