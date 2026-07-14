@@ -1,0 +1,58 @@
+# ============================================
+# Node.js / JavaScript
+# ============================================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.env
+.env.local
+.env.*.local
+
+# ============================================
+# Backend
+# ============================================
+backend/uploads/
+backend/temp/
+backend/logs/
+dist/
+build/
+*.log
+
+# ============================================
+# Frontend
+# ============================================
+frontend/dist/
+frontend/build/
+frontend/.vite/
+frontend/node_modules/
+
+# ============================================
+# IDE / Editor
+# ============================================
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# ============================================
+# Database
+# ============================================
+*.sqlite
+*.db
+*.sql
+database.sql
+
+# ============================================
+# Misc
+# ============================================
+*.pem
+*.key
+*.crt
+.htaccess
+.ftpconfig
