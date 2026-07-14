@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuth } from '../context/AuthContext';
 import '../styling/register.css';
 import * as icons from 'react-icons/lu';
+import { Link } from 'react-router-dom';
 
 function Register() {
     const { registerRetailer, registerWholesaler } = useAuth();
@@ -17,21 +18,21 @@ function Register() {
         store_name: '',
         phone: '',
         address: '',
-        
+
         // Payment fields (common)
         payment_method: 'mpesa',
-        
+
         // M-Pesa fields
         mpesa_phone_number: '',
         mpesa_paybill_number: '',
         mpesa_account_number: '',
-        
+
         // Bank fields
         bank_name: '',
         bank_account_name: '',
         bank_account_number: '',
         bank_branch: '',
-        
+
         // Wholesaler specific
         business_license: '',
         tax_id: '',
@@ -51,7 +52,7 @@ function Register() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        
+
         if (formData.password !== formData.confirmPassword) {
             setError('Passwords do not match');
             return;
@@ -147,7 +148,7 @@ function Register() {
         <div className="reg-container">
             <div className="reg-card">
                 <h2 className="reg-title">Create Your VendConnect Account</h2>
-                
+
                 <div className="reg-user-type">
                     <button
                         type="button"
@@ -170,7 +171,7 @@ function Register() {
                 <form onSubmit={handleSubmit} className="reg-form">
                     {/* Account Information Section */}
                     <div className="reg-section-title">Account Information</div>
-                    
+
                     <div className="reg-row">
                         <div className="reg-field reg-field-half">
                             <input
@@ -250,13 +251,13 @@ function Register() {
                     <div className="reg-section-title">
                         {userType === 'retailer' ? 'Payment Method (How you will pay)' : 'Payment Method (How you will receive payouts)'}
                     </div>
-                    
+
                     <div className="reg-payment-methods">
                         <button
                             type="button"
                             className={`reg-payment-btn ${paymentMethod === 'mpesa' ? 'reg-payment-active' : ''}`}
                             onClick={() => handlePaymentMethodChange('mpesa')}
-                      >
+                        >
                             <icons.LuSmartphone size={25} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
                             M-Pesa
                         </button>
@@ -265,8 +266,8 @@ function Register() {
                             className={`reg-payment-btn ${paymentMethod === 'bank' ? 'reg-payment-active' : ''}`}
                             onClick={() => handlePaymentMethodChange('bank')}
                         >
-                             <icons.LuBanknote size={25} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
-                             Bank Transfer
+                            <icons.LuBanknote size={25} style={{ marginRight: '8px', verticalAlign: 'middle' }} />
+                            Bank Transfer
                         </button>
                     </div>
 
@@ -283,12 +284,12 @@ function Register() {
                                     required
                                 />
                                 <small className="reg-field-note">
-                                    {userType === 'retailer' 
-                                        ? 'You will pay using this M-Pesa number' 
+                                    {userType === 'retailer'
+                                        ? 'You will pay using this M-Pesa number'
                                         : 'Your payouts will be sent to this M-Pesa number'}
                                 </small>
                             </div>
-                            
+
                             {userType === 'wholesaler' && (
                                 <>
                                     <div className="reg-row">
@@ -335,7 +336,7 @@ function Register() {
                                     ))}
                                 </select>
                             </div>
-                            
+
                             <div className="reg-field">
                                 <input
                                     type="text"
@@ -347,7 +348,7 @@ function Register() {
                                     required
                                 />
                             </div>
-                            
+
                             <div className="reg-row">
                                 <div className="reg-field reg-field-half">
                                     <input
@@ -378,7 +379,7 @@ function Register() {
                     {userType === 'wholesaler' && (
                         <>
                             <div className="reg-section-title">Business Details</div>
-                            
+
                             <div className="reg-row">
                                 <div className="reg-field reg-field-half">
                                     <input
@@ -425,7 +426,7 @@ function Register() {
                 </form>
 
                 <p className="reg-footer">
-                    Already have an account? <a href="/login" style={{ color: 'rgb(239, 129, 10)' }}>Login</a>
+                    Already have an account? <Link to="/login" style={{ color: 'rgb(239, 129, 10)' }}>Login</Link>
                 </p>
             </div>
         </div>
