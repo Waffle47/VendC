@@ -20,22 +20,24 @@ const protect = async (req, res, next) => {
             let user;
             if (decoded.usertype === 'retailer') {
                 const [rows] = await db.query(
-                    'SELECT retailer_id as id, email, store_name as name, "retailer" as userType FROM retailers WHERE retailer_id = ?',
+                    // FIX: Swapped inner double quotes for single quotes
+                    "SELECT retailer_id as id, email, store_name as name, 'retailer' as userType FROM retailers WHERE retailer_id = ?",
                     [decoded.id]
                 );
                 user = rows[0];
                 console.log('Retailer query result:', user);
             } else if (decoded.usertype === 'wholesaler') {
                 const [rows] = await db.query(
-                    'SELECT wholesaler_id as id, email, business_name as name, "wholesaler" as userType FROM wholesalers WHERE wholesaler_id = ?',
+                    // FIX: Swapped inner double quotes for single quotes
+                    "SELECT wholesaler_id as id, email, business_name as name, 'wholesaler' as userType FROM wholesalers WHERE wholesaler_id = ?",
                     [decoded.id]
                 );
                 user = rows[0];
                 console.log('Wholesaler query result:', user);
             } else if (decoded.usertype === 'admin') {
-                //  using email as name 
                 const [rows] = await db.query(
-                    'SELECT admin_id as id, email, email as name, role, "admin" as userType FROM admins WHERE admin_id = ?',
+                    // FIX: Swapped inner double quotes for single quotes
+                    "SELECT admin_id as id, email, email as name, role, 'admin' as userType FROM admins WHERE admin_id = ?",
                     [decoded.id]
                 );
                 user = rows[0];
@@ -47,7 +49,7 @@ const protect = async (req, res, next) => {
                 return res.status(401).json({ message: 'Not authorized, user not found' });
             }
 
-            console.log(' User found, attaching to req.user');
+            console.log('✅ User found, attaching to req.user');
             req.user = user;
             next();
         } catch (error) {
