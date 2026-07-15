@@ -11,14 +11,20 @@ router.get('/stats', async (req, res) => {
     try {
         const [retailerCount] = await db.query('SELECT COUNT(*) as count FROM retailers WHERE is_active = 1');
         const [wholesalerCount] = await db.query('SELECT COUNT(*) as count FROM wholesalers');
-        const [pendingVerifications] = await db.query('SELECT COUNT(*) as count FROM wholesalers WHERE verification_status = "pending"');
+
+        // FIX: Swapped outer to double quotes, inner to single quotes
+        const [pendingVerifications] = await db.query("SELECT COUNT(*) as count FROM wholesalers WHERE verification_status = 'pending'");
+
         const [orderCount] = await db.query('SELECT COUNT(*) as count FROM orders');
-        const [revenue] = await db.query('SELECT SUM(total_amount) as total FROM orders WHERE payment_status = "paid"');
+
+        // FIX: Swapped outer to double quotes, inner to single quotes
+        const [revenue] = await db.query("SELECT SUM(total_amount) as total FROM orders WHERE payment_status = 'paid'");
 
         // Handle disputes table - returns 0 if table doesn't exist
         let disputeCount = 0;
         try {
-            const [disputes] = await db.query('SELECT COUNT(*) as count FROM disputes WHERE status IN ("open", "investigating")');
+            // FIX: Swapped outer to double quotes, inner to single quotes
+            const [disputes] = await db.query("SELECT COUNT(*) as count FROM disputes WHERE status IN ('open', 'investigating')");
             disputeCount = disputes[0]?.count || 0;
         } catch (error) {
             if (error.code === 'ER_NO_SUCH_TABLE') {
@@ -63,6 +69,7 @@ router.get('/stats', async (req, res) => {
         res.status(500).json({ message: 'Server error', error: error.message });
     }
 });
+
 
 // Get recent orders for dashboard - FIXED: Using correct column names
 router.get('/recent-orders', async (req, res) => {
