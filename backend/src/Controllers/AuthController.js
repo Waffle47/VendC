@@ -71,7 +71,8 @@ const login = async (req, res) => {
             if (profile_picture.startsWith('http')) {
                 fullProfilePicture = profile_picture;
             } else {
-                fullProfilePicture = `http://localhost:5000${profile_picture}`;
+                // Point to the live Render backend instead of localhost
+                fullProfilePicture = `https://vendconnect-backend.onrender.com${profile_picture}`;
             }
         }
 
