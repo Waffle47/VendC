@@ -3,11 +3,12 @@ import { useAuth } from '../context/AuthContext';
 import { FaGoogle, FaApple, FaEye, FaEyeSlash } from 'react-icons/fa';
 import backImage from '../assets/logbckg.png';
 import loginIllustration from '../assets/connectlogo.png';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styling/login.css';
 
 function Login() {
     const { login } = useAuth();
+    const navigate = useNavigate(); // Initialize the navigation hook
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -32,10 +33,11 @@ function Login() {
         const result = await login(email, password);
 
         if (result.success) {
+            // Use React Router navigation instead of hard reloads
             if (result.data.userType === 'admin') {
-                window.location.href = '/admin';
+                navigate('/admin');
             } else {
-                window.location.href = '/dashboard';
+                navigate('/dashboard');
             }
         } else {
             setError(result.error);
@@ -44,8 +46,8 @@ function Login() {
     };
 
     const handleForgotPassword = () => {
-        // Navigate to forgot password page or open modal
-        window.location.href = '/forgot-password';
+        // Safe navigation for forgot password page
+        navigate('/forgot-password');
     };
 
     const toggleShowPassword = () => {
