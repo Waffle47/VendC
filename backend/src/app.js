@@ -32,7 +32,8 @@ app.use(cors({
     origin: [
         'http://localhost:3000',
         'http://localhost:5173',
-        process.env.FRONTEND_URL // Adds your GitHub Pages link via Render
+        'https://waffle47.github.io', // hardcoded failsafe
+        process.env.FRONTEND_URL
     ],
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
